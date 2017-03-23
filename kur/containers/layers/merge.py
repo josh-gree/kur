@@ -98,17 +98,17 @@ class Merge(Layer):					# pylint: disable=too-few-public-methods
 						}.get(self.mode, {})
 					)
 				else:
-					func = {
-						'multiply' : L.multiply,
-						'add' : L.add,
-						'concat' : L.concatenate,
-						'average' : L.average
-					}.get(self.mode)
-					return func(
-						inputs,
-						axis=self.axis,
-						name=self.name
-					)
+					if self.mode == 'concat':
+						return L.concatenate(inputs,axis=self.axis,name=self.name)
+					else:
+						func = {
+							'multiply' : L.multiply,
+							'add' : L.add,
+							'average' : L.average
+						}.get(self.mode)
+						return func(
+							inputs
+						)
 
 			yield merge
 
