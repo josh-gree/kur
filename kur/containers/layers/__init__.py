@@ -20,6 +20,7 @@ from .placeholder import Placeholder
 from .parallel import Parallel
 from .expand import Expand
 from .convolution import Convolution
+from .convolutiontranspose import Convolutiontranspose
 from .reuse import Reuse
 from .flatten import Flatten
 from .dense import Dense
