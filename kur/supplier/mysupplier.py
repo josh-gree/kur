@@ -1,6 +1,8 @@
 from . import Supplier
 from ..sources import MySource
 
+import os
+
 class MySupplier(Supplier):
 
 	@classmethod
@@ -9,10 +11,10 @@ class MySupplier(Supplier):
 		"""
 		return 'mysupplier'
 
-	def __init__(self, names, *args, **kwargs):
+	def __init__(self, path, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		fnames = open(names,'r').readlines()
-		fnames = list(map(str.strip,fnames))
+		fnames = os.listdir(path)
+		fnames = [os.path.join(path,x) for x in fnames]
 		self.data = {'x':MySource(fnames=fnames,name='x'),
 					 'y':MySource(fnames=fnames,name='y')}
 
